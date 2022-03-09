@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        app: {{NAME}}
+    name: {{NAME}}
+spec:
+    replicas: {{REPLICAS}}
+    selector:
+        matchLabels:
+            app: {{NAME}}
+    template:
+        metadata:
+            labels:
+                app: {{NAME}}
+        spec:
+            containers:
+                -   name: bombardier
+                    image: alpine/bombardier
+                    imagePullPolicy: IfNotPresent
+                    command: ['/bin/sh']
+                    args: ['-c', 'for run in $(seq 1 100000); do bombardier {{CONNECTIONS}} {{DURATION}} {{METHOD}} {{BODY}} {{HEADERS}} "{{URL}}"; done']
